@@ -1,6 +1,0 @@
-module MyAny where
-
-myAny :: (a -> Bool) -> [a] -> Bool
-myAny f (x:xs)
-  | f x = True
-  | otherwise = myAny f xs
