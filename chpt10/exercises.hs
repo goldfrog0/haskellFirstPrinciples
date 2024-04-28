@@ -11,3 +11,5 @@ bug6 = foldl const 'a' [1..5]
 bug7 = foldl const 0 "tacos"
 bug8 = foldl const 0 "burritos"
 bug9 = foldl const 'z' [1..5]
+
+

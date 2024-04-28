@@ -1,0 +1,6 @@
+module StopsStarts where
+
+stops = "pbtdkg"
+vowels = "aeiou"
+
+combos = [(a,b,c) | a <- stops, b <- vowels, c <- stops]
