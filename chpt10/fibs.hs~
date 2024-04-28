@@ -1,5 +1,0 @@
-module Fibonacci where
-
-fibsInfList = 1 : scanl (+1) fibsInfList
-
-fibsN x = fibs !! x
