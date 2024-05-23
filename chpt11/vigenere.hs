@@ -1,7 +1,7 @@
 module Cipher where
 import Data.Char
-
-
+import Control.Monad (forever)
+import System.Exit
 --Implements a caesar cipher on characters only in the a-z range
 cipherMapLower :: Int -> Char -> Char
 cipherMapLower shift character
@@ -69,3 +69,31 @@ chrToInt :: Char -> Int
 chrToInt char
   | elem char (['a'..'z']++['A'..'Z']) = ord (toLower char) - 97
   | otherwise = 0
+
+runVigenere :: IO()
+runVigenere = do
+  putStrLn "enter plaintext"
+  plainText <- getLine
+  putStrLn "Enter key phrase (only alphabetical)"
+  key <- getLine
+  putStrLn $ vigenereCipher key plainText
+  exitSuccess
+
+runCaesar :: IO()
+runCaesar = do
+    putStrLn "enter plaintext"
+    plainText <- getLine
+    putStrLn "Enter shift"
+    key <- getLine
+    putStrLn $ caesarCipher (read key) plainText
+    exitSuccess
+
+main :: IO ()
+main = forever $ do
+  putStrLn $ "What cipher would you like to make?"
+    ++ "v: Vigenere | c: caesar"
+  cipher <- getLine
+  case cipher of
+    "v" -> runVigenere
+    "c" -> runCaesar
+    _   -> putStrLn "Invalid selection"
