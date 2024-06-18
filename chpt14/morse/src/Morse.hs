@@ -67,8 +67,8 @@ charToMorse c =
   M.lookup c letterToMorse
 
 stringToMorse :: String -> Maybe [Morse]
-stringToMorse s =
-  sequence $ fmap charToMorse s
+stringToMorse = traverse charToMorse
+--  sequence $ fmap charToMorse s
 
 morseToChar :: Morse -> Maybe Char
 morseToChar m =
