@@ -1,6 +1,5 @@
 module TravPrac where
 
-
 newtype Identity a = Identity a
   deriving (Eq, Ord, Show)
 
@@ -24,17 +23,19 @@ instance Traversable Identity where
   traverse f (Identity x) = Identity <$> f x
 
 
-newtype Constant a b =
-  Constant {getConstant :: a}
-  deriving (Eq, Show, Ord)
+newtype Constant a b = Constant { getConstant :: a }
+  deriving (Show)
 
 instance Functor (Constant a) where
-  fmap f (Constant a) = Constant $ f $ getConstant a
+  fmap _ (Constant x) = Constant x
 
-
+instance Foldable (Constant a) where
+  foldMap _ _ = mempty
 
 instance Traversable (Constant a) where
-  traverse f (Constant a) = Constant <$> f (getConstant a)
+  -- traverse :: (Applicative f) => (a -> f b) -> Constant a -> f (Constant b)
+  traverse f (Constant x) = liftA Constant (pure x)
+
 
 --instance Traversable Identity where
 --  traverse d (Identity a) =  undefined
